@@ -1,5 +1,6 @@
 package com.jahu.lifecycle
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -20,6 +21,7 @@ class SeekBarFragment : Fragment() {
 
         activity?.let {
             val viewModel = ViewModelProviders.of(it).get(SeekBarViewModel::class.java)
+            viewModel.seekBarValue.observe(this, Observer<Int> { seekBar.progress = it!! })
 
             seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
